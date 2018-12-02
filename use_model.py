@@ -2,6 +2,14 @@ from keras.models import model_from_json
 import cv2
 import numpy as np
 
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+config.log_device_placement = False  # to log device placement (on which device the operation ran)
+                                    # (nothing gets printed in Jupyter, only if you run it standalone)
+sess = tf.Session(config=config)
+set_session(sess)  # set this TensorFlow session as the default session for Keras
 
 json_file = open('model.json', 'r')
 loaded_model_json = json_file.read()
@@ -17,7 +25,7 @@ print("Loaded model from disk")
 '''
 loaded_model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
-img = cv2.imread("./dogs_cates/test/21.jpg")
+img = cv2.imread("./test/22.jpg")
 img = cv2.resize(img, (50,50))
 print(img.shape)
 img = img.reshape(1, 50, 50, 3)
