@@ -25,11 +25,22 @@ print("Loaded model from disk")
 '''
 loaded_model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
-img = cv2.imread("./test/22.jpg")
-img = cv2.resize(img, (50,50))
-print(img.shape)
-img = img.reshape(1, 50, 50, 3)
+for i in range(1,10):
+    img = cv2.imread("./test/"+ str(i)+".jpg")
+    img = cv2.resize(img, (50,50))
+    print(img.shape)
+    img = img.reshape(1, 50, 50, 3)
 
-print(img.shape)
-#print(np.argmax(loaded_model.predict(img)))
-print(loaded_model.predict(img))
+    print(img.shape)
+    #print(np.argmax(loaded_model.predict(img)))
+    prediction = loaded_model.predict(img)
+    # print(type(prediction))
+    # print(prediction.shape)
+    label = ""
+    print(prediction)
+    print(prediction[0][0])
+    if prediction[0][0] > 0.5 :
+        label = "dog"
+    else:
+        label = "cat"
+    print("for picture %d.jpg, prediction is: %s" % (i, label))

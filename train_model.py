@@ -4,6 +4,15 @@ from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
 
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+config.log_device_placement = False  # to log device placement (on which device the operation ran)
+                                    # (nothing gets printed in Jupyter, only if you run it standalone)
+sess = tf.Session(config=config)
+set_session(sess)  # set this TensorFlow session as the default session for Keras
+
 # Initialising the CNN
 model = Sequential()
 
@@ -42,9 +51,9 @@ training_set = train_datagen.flow_from_directory('training_data',
                                                  class_mode = 'binary')
 
 model.fit_generator(training_set,
-                         steps_per_epoch = 8000,
-                         epochs = 25,
-                         validation_steps = 2000)
+                         steps_per_epoch = 80,
+                         epochs = 10,
+                         validation_steps = 200)
 
 model_json = model.to_json()
 with open("./model.json","w") as json_file:
