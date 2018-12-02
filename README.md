@@ -6,11 +6,11 @@ For more description :- https://medium.com/@parthvadhadiya424/hello-world-progra
 
 
 ## Prerequisites
+use conda to install dependencies.
 
-NumPy>=1.13.1 -: sudo pip3 install numpy 
-
-Keras>=2.0.6  -: https://keras.io/
-
+```
+conda install tensorflow-gpu keras opencv pillow numpy
+```
 
 
 ## Usage
