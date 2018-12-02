@@ -7,9 +7,9 @@ For more description :- https://medium.com/@parthvadhadiya424/hello-world-progra
 
 ## Prerequisites
 
-NumPy==1.13.1 -: sudo pip3 install numpy 
+NumPy>=1.13.1 -: sudo pip3 install numpy 
 
-Keras==2.0.6  -: https://keras.io/
+Keras>=2.0.6  -: https://keras.io/
 
 
 
