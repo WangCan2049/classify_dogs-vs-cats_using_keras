@@ -9,9 +9,8 @@ IMG_SIZE = 50
 
 def create_train_test_dir():
     counter=1
-    cwd = os.getcwd()
-    # os.makedirs(os.path.join("training_data","cats"))
-    # os.makedirs(os.path.join("training_data","dogs"))
+    os.makedirs(os.path.join("training_data","cats"),exist_ok=True)
+    os.makedirs(os.path.join("training_data","dogs"),exist_ok=True)
     for img in tqdm(os.listdir(TRAIN_DIR)):
         word_label = img.split('.')[-3]
         if word_label == 'cat': lable="cats"
@@ -19,12 +18,8 @@ def create_train_test_dir():
         path = os.path.join(TRAIN_DIR,img)
         img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (IMG_SIZE,IMG_SIZE))
-        img_file = os.path.join(cwd, "training_data", lable, str(counter)+'.jpg')
-        # print("image_file", img_file)
-        # result = cv2.imwrite(img_file, img)
-        # print("image write: " , result)
-        # cv2.imwrite("./training_data/"+lable+'/'+str(counter)+'.jpg',img)
-        #print("image saved"+str(counter))
+        img_file = os.path.join("training_data", lable, str(counter)+'.jpg')
+        cv2.imwrite(img_file, img)
         counter += 1
 
 

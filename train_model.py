@@ -27,6 +27,7 @@ model.add(Conv2D(32, (3, 3), activation = 'relu'))
 model.add(MaxPooling2D(pool_size = (2, 2)))
 
 # Flattening
+# why flattern here?  -> change shape to ONE dimension
 model.add(Flatten())
 
 # Full connection
@@ -49,11 +50,17 @@ training_set = train_datagen.flow_from_directory('training_data',
                                                  target_size = (50, 50),
                                                  batch_size = 32,
                                                  class_mode = 'binary')
+# todo: use tensorboard
+from keras.callbacks import TensorBoard
+from time import time
+tensorboard = TensorBoard(log_dir="logs/{}".format(time()))
 
 model.fit_generator(training_set,
-                         steps_per_epoch = 80,
-                         epochs = 10,
-                         validation_steps = 200)
+                         steps_per_epoch = 100,
+                         epochs = 15,
+                         validation_steps = 200,
+                         callbacks=[tensorboard])
+
 
 model_json = model.to_json()
 with open("./model.json","w") as json_file:
